@@ -91,7 +91,7 @@ exports.createNewGuest = async function (request, response) {
         const { error, value } = createGuestSchema.validate(request.body ,{ abortEarly: false });
         if (error) {
             const errors = error.details.map(err => err.message);
-            return res.status(400).json({message: "Validation Error", errors});
+            return response.status(400).json({message: "Validation Error", errors});
         }
         //check if the national id already exists
         const existingGuest = await Guest.findOne({ where: { nationalId: value.nationalId } });

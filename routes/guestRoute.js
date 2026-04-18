@@ -22,7 +22,7 @@ router.post("/", allowTo("admin", "receptionist"), guestController.createNewGues
 router.put("/:id", allowTo("admin", "receptionist"), guestController.updateGuestById);
 
 //delete guest by id
-router.delete("/:id", allowTo("admin", "receptionist"), guestController.deleteGuestById);
+router.delete("/:id", allowTo("admin"), guestController.deleteGuestById);
 
 
 //export router

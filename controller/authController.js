@@ -24,6 +24,7 @@ exports.register = async (req, res) => {
         }
         //4. create user
         const newUser = await User.create(value);
+        //5. return response without password
         res.status(201).json({message : "User registered successfully",user : newUser});
     } catch (error) {
         console.error(error);

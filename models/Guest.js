@@ -8,7 +8,7 @@ const Guest = sequelize.define('Guest',{
         primaryKey : true,
         defaultValue : DataTypes.UUIDV4
     },
-    firstname : {
+    Firstname : {
         type : DataTypes.STRING,
         allowNull : false,
         validators : {
@@ -16,7 +16,7 @@ const Guest = sequelize.define('Guest',{
             len : [2,50]
         }    
     },
-    lastname : {
+    Lastname : {
         type : DataTypes.STRING,
         allowNull : false,
         validators : {
