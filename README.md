@@ -102,41 +102,49 @@ The system supports authentication, role-based access control, and full CRUD ope
 ### 1. Clone repository
 ```bash
 git clone https://github.com/your-username/hotel-management-api.git
-
+```
+### 2. Install dependencies
+```bash
 npm install
-
+```
+## 3. Create .env file
+```env
 DB_HOST=localhost
 DB_USER=root
 DB_PASSWORD=your_password
 DB_NAME=hotel_db
+
 JWT_SECRET=your_secret
 JWT_EXPIRES_IN=1d
+```
 
+## 4. Run the project
+```bash
 npm run dev
+```
+🧠 Key Features Implemented
+JWT Authentication system
+Role-based authorization
+Sequelize relationships (One-to-Many & Many-to-Many)
+Booking conflict validation (date overlap)
+Service price calculation inside booking
+Pagination + filtering system
+Joi validation for all inputs
 
-📌 Key Features Implemented
-JWT Authentication
-Role-Based Access Control
-Sequelize Associations (One-to-Many, Many-to-Many)
-Booking conflict validation (date overlap check)
-Service pricing calculation inside bookings
-Pagination & filtering
-Input validation using Joi
-
-🧠 What I Learned From This Project
-Building scalable backend architecture
-Database relationships in Sequelize
-Authentication & authorization flow
-Real-world booking system logic
+📈 What This Project Demonstrates
+Real-world backend architecture
+Secure authentication system
+Database design & relationships
+Business logic implementation
 API design best practices
 
-📷 Future Improvements
+🚀 Future Improvements
 Payment gateway integration
-Email notifications
+Email notifications system
 Swagger API documentation
 Unit testing (Jest)
 Docker support
 
 👨‍💻 Author
 Abdelrahman Kamel
-Computer Science Student | Backend Developer (Node.js)
+Backend Developer | Computer Science Student
