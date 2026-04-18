@@ -85,12 +85,13 @@ exports.findGuestById = async function (request, response) {
 };
 
 // Add New Guest
-exports.addNewGuest = async function (request, response) {
+exports.createNewGuest = async function (request, response) {
     try {
         //validate request body
         const { error, value } = createGuestSchema.validate(request.body ,{ abortEarly: false });
         if (error) {
-            return response.status(400).json({ message: error.details[0].message });
+            const errors = error.details.map(err => err.message);
+            return res.status(400).json({message: "Validation Error", errors});
         }
         //check if the national id already exists
         const existingGuest = await Guest.findOne({ where: { nationalId: value.nationalId } });
@@ -113,7 +114,8 @@ exports.updateGuestById = async function (request, response) {
         //validate request body
         const { error, value } = updateGuestSchema.validate(request.body);
         if (error) {
-            return response.status(400).json({ message: error.details[0].message });
+            const errors = error.details.map(err => err.message);
+            return res.status(400).json({message: "Validation Error", errors});
         }
         //find guest by id
         const id = request.params.id;

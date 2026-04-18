@@ -12,7 +12,7 @@ router.get("/", bookingController.findAllBookings);
 router.get("/:id", bookingController.findBookingById);
 
 //add new booking
-router.post("/", bookingController.addNewBooking);
+router.post("/", bookingController.createNewBooking);
 
 //update booking by id
 router.patch("/:id", bookingController.updateBookingById);

@@ -85,12 +85,14 @@ exports.findRoomById = async function (request, response) {
 };
 
 // Add New Room
-exports.createRoom = async function (request, response) {
+exports.createNewRoom = async function (request, response) {
     try {
         //validate request body
         const { error, value } = createRoomSchema.validate(request.body ,{ abortEarly: false });
         if (error) {
-            return response.status(400).json({ message: error.details[0].message });
+            const errors = error.details.map(err => err.message);
+            return res.status(400).json({message: "Validation Error", errors});
+            
         }
         //check if the room number already exists
         const existingRoom = await Room.findOne({ where: { roomNumber: value.roomNumber } });

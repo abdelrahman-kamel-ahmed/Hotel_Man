@@ -2,8 +2,13 @@
 const router = require("express").Router();
 // req controllers
 const serviceController = require("../controller/serviceController.js");
+// req middlewares
+const { authMiddleware } = require("../middleWares/authMiddleWare");
+const { allowTo } = require("../middleWares/roleMiddleWare");
 
 // routes
+router.use(authMiddleware);
+router.use(allowTo("admin"));
 // Create Service Route
 router.post("/", serviceController.createNewService);
 // Get Services Route

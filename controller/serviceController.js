@@ -94,7 +94,8 @@ exports.createNewService = async function (request, response) {
         //validate request body
         const { error, value } = createServiceSchema.validate(request.body ,{ abortEarly: false });
         if (error) {
-            return response.status(400).json({ message: error.details[0].message });
+            const errors = error.details.map(err => err.message);
+            return res.status(400).json({message: "Validation Error", errors});
         }
         // //check if the service already exists
         // const existingService = await Service.findOne({ where: { name: value.name } });
@@ -117,7 +118,8 @@ exports.updateServiceById = async function (request, response) {
         //validate request body
         const { error, value } = updateServiceSchema.validate(request.body);
         if (error) {
-            return response.status(400).json({ message: error.details[0].message });
+            const errors = error.details.map(err => err.message);
+            return res.status(400).json({message: "Validation Error", errors});
         }
         //find service by id
         const id = request.params.id;

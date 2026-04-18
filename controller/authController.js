@@ -14,7 +14,8 @@ exports.register = async (req, res) => {
         const{error,value} = registerSchema.validate(req.body,{abortEarly : false});
         //2. handle validation error
         if(error){
-            return res.status(400).json({message : error.details[0].message});
+            const errors = error.details.map(err => err.message);
+            return res.status(400).json({message: "Validation Error", errors});
         }
         //3. check if user already exists
         const user = await User.findOne({where : {email : value.email}});
@@ -35,7 +36,8 @@ exports.login = async (req, res) => {
         const{error,value} = loginSchema.validate(req.body,{abortEarly : false});
         //2. handle validation error
         if(error){
-            return res.status(400).json({message : error.details[0].message});
+            const errors = error.details.map(err => err.message);
+            return res.status(400).json({message: "Validation Error", errors});
         }
         //3. check if user exists
         const user = await User.findOne({where : {email : value.email}});

@@ -92,7 +92,8 @@ exports.createNewRoomType = async function (request, response) {
         //validate request body
         const { error, value } = createRoomTypeSchema.validate(request.body ,{ abortEarly: false });
         if (error) {
-            return response.status(400).json({ message: error.details[0].message });
+            const errors = error.details.map(err => err.message);
+            return res.status(400).json({message: "Validation Error", errors});
         }
         //create room type
         const newRoomType = await RoomType.create(value);
@@ -110,7 +111,8 @@ exports.updateRoomTypeById = async function (request, response) {
         //validate request body
         const { error, value } = updateRoomTypeSchema.validate(request.body);
         if (error) {
-            return response.status(400).json({ message: error.details[0].message });
+            const errors = error.details.map(err => err.message);
+            return res.status(400).json({message: "Validation Error", errors});
         }
         //find room type by id
         const id = request.params.id;

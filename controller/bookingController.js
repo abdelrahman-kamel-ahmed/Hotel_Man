@@ -4,12 +4,13 @@ const { Booking, Guest, Room, Service, RoomType, BookingService } = require("../
 //req validation schemas
 const { createBookingSchema, updateBookingSchema } = require("../validation/bookingValidation");
 
-exports.createBooking = async function (request, response) {
+exports.createNewBooking = async function (request, response) {
     try {
         //validate request body
         const { error, value } = createBookingSchema.validate(request.body ,{ abortEarly: false });
         if (error) {
-            return response.status(400).json({ message: error.details[0].message });
+            const errors = error.details.map(err => err.message);
+            return res.status(400).json({message: "Validation Error", errors});
         }
         //create booking
         const { guestId, roomId, checkInDate, checkOutDate, services } = value;
@@ -37,7 +38,7 @@ exports.createBooking = async function (request, response) {
             {where : {
                 roomId: roomId,
                 //if there is a booking and its status is not cancelled or checked oot this means that the room is now busy 
-                status:{[Op.notIn]:["cancelled", "checkedOut"]},
+                status:{[Op.notIn]:["cancelled", "checked-out"]},
                 [Op.and]: [
                 //check if there is a booking that overlaps with the given dates
 

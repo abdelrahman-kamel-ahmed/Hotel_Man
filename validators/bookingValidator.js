@@ -3,8 +3,8 @@ const Joi = require("joi");
 
 //createBooking Schema
 exports.createBookingSchema = Joi.object({
-    checkedin: Joi.date().iso().required(),
-    checkedout: Joi.date().iso().min(Joi.ref('checkedin')).required(),
+    checkInDate: Joi.date().iso().required(),
+    checkOutDate: Joi.date().iso().min(Joi.ref('checkInDate')).required(),
     guestId: Joi.string().uuid().required(),
     roomId: Joi.string().uuid().required(),
     services: Joi.array().items(Joi.object({
